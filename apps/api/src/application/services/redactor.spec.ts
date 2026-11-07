@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { Redactor } from '@/application/services/redactor';
+import { Redactor } from './redactor';
 import { RegexNerPiiDetectorAdapter } from '@/infra/pii/regex-ner-pii-detector.adapter';
 
 const redactor = new Redactor(new RegexNerPiiDetectorAdapter());
@@ -30,16 +30,25 @@ describe('Redactor', () => {
       'Pay to SE35 5000 0000 0549 1000 0003 monthly.',
       'SE35 5000 0000 0549 1000 0003',
     ],
+    [
+      'IBAN',
+      'Pay to SE35 5000 0000 0549\n1000 0003 monthly.',
+      'SE35 5000 0000 0549\n1000 0003',
+    ],
     ['POSTCODE', 'The office is at 111 22 Stockholm.', '111 22'],
+    ['POSTCODE', 'The office is at 123\n46 Solvik.', '123\n46'],
     ['AMOUNT', 'The fee is 45 000 SEK per month.', '45 000 SEK'],
+    ['AMOUNT', 'The fee is 45\n000 SEK per month.', '45\n000 SEK'],
+    ['AMOUNT', 'The fee is 45\u00A0000 SEK per month.', '45\u00A0000 SEK'],
+    ['AMOUNT', 'The fee is USD 2,400 per year.', 'USD 2,400'],
+    ['AMOUNT', 'Pay EUR 1 250,50 on delivery.', 'EUR 1 250,50'],
     ['ADDRESS', 'The office is at Storgatan 12 in town.', 'Storgatan 12'],
     ['ORG', 'Signed by Nordlys Software AB today.', 'Nordlys Software AB'],
     ['PERSON', 'The Consultant is Anna Lindqvist.', 'Anna Lindqvist'],
   ])('catches %s in "%s"', (type, sentence, value) => {
     const { redactedText } = redactor.redact(sentence);
 
-    expect(redactedText).toContain(`[${type}_1]`);
-    expect(redactedText).not.toContain(value);
+    expect(redactedText).toBe(sentence.replace(value, `[${type}_1]`));
   });
 
   it('uses the same token for the same value', () => {
@@ -54,7 +63,7 @@ describe('Redactor', () => {
 
   it('leaves ordinary contract wording alone', () => {
     const wording =
-      'Termination. Either party may terminate with 30 days notice by 2026-01-31. PROVIDED AS IS.';
+      "Termination. Either party may terminate with 30 days notice by 2026-01-31. PROVIDED AS IS. 5. Customer Data. Sharing with the Provider's partners.";
 
     expect(redactor.redact(wording).redactedText).toBe(wording);
   });

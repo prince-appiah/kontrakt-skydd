@@ -1,0 +1,83 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R 5 0 R] /Count 2 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents 4 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >> >> >> >>
+endobj
+4 0 obj
+<< /Length 3478 >>
+stream
+BT /F2 16 Tf 64 778 Td (SOFTWARE-AS-A-SERVICE TERMS) Tj ET
+BT /F1 11 Tf 64 748 Td (These Terms are entered into on 2026-11-01 between Cloudhaven Software Inc. \(the) Tj ET
+BT /F1 11 Tf 64 733 Td ("Provider"\), 500 Example Avenue, Suite 12, Wilmington, and Ridgeline Studio AB \(org. no.) Tj ET
+BT /F1 11 Tf 64 718 Td (559104-7788\), Sjögatan 3, 211 20 Malmö \(the "Customer"\), represented by Sofia Bergman,) Tj ET
+BT /F1 11 Tf 64 703 Td (email sofia.bergman@example.test, phone +46 73 555 03 45.) Tj ET
+BT /F2 11 Tf 64 680 Td (1. Subscription and Fees) Tj ET
+BT /F1 11 Tf 64 664 Td (The Customer subscribes to the Provider's platform for an annual fee of USD 2,400, invoiced in) Tj ET
+BT /F1 11 Tf 64 649 Td (advance to the account IBAN SE35 5000 0000 0549 1000 0003 designated by the Provider. All) Tj ET
+BT /F1 11 Tf 64 634 Td (fees are non-refundable.) Tj ET
+BT /F2 11 Tf 64 611 Td (2. Term and Renewal) Tj ET
+BT /F1 11 Tf 64 595 Td (The initial term is 12 months. The subscription renews automatically for successive 12-month) Tj ET
+BT /F1 11 Tf 64 580 Td (periods unless the Customer gives written notice of non-renewal at least 90 days before the end) Tj ET
+BT /F1 11 Tf 64 565 Td (of the current term.) Tj ET
+BT /F2 11 Tf 64 542 Td (3. Price Changes) Tj ET
+BT /F1 11 Tf 64 526 Td (The Provider may increase the fees by up to 30% at each renewal by giving the Customer 15) Tj ET
+BT /F1 11 Tf 64 511 Td (days notice.) Tj ET
+BT /F2 11 Tf 64 488 Td (4. Changes to These Terms) Tj ET
+BT /F1 11 Tf 64 472 Td (The Provider may change these Terms or the service at any time. Continued use of the service) Tj ET
+BT /F1 11 Tf 64 457 Td (after a change counts as acceptance of the change.) Tj ET
+BT /F2 11 Tf 64 434 Td (5. Customer Data) Tj ET
+BT /F1 11 Tf 64 418 Td (The Customer grants the Provider a perpetual, worldwide, irrevocable licence to use, copy and) Tj ET
+BT /F1 11 Tf 64 403 Td (analyse all data uploaded to the service, including for training machine learning models and for) Tj ET
+BT /F1 11 Tf 64 388 Td (sharing with the Provider's partners.) Tj ET
+BT /F2 11 Tf 64 365 Td (6. Availability) Tj ET
+BT /F1 11 Tf 64 349 Td (The service is provided "as is" and "as available". The Provider gives no guarantee of uptime,) Tj ET
+BT /F1 11 Tf 64 334 Td (performance or data retention, and is not liable for any loss of data.) Tj ET
+BT /F2 11 Tf 64 311 Td (7. Suspension and Termination) Tj ET
+BT /F1 11 Tf 64 295 Td (The Provider may suspend the service at any time and may terminate this Agreement for) Tj ET
+BT /F1 11 Tf 64 280 Td (convenience with 7 days notice, without any refund. The Customer may terminate only at the) Tj ET
+BT /F1 11 Tf 64 265 Td (end of the current term.) Tj ET
+BT /F2 11 Tf 64 242 Td (8. Limitation of Liability) Tj ET
+BT /F1 11 Tf 64 226 Td (The Provider's total liability is limited to the fees paid by the Customer in the month preceding) Tj ET
+BT /F1 11 Tf 64 211 Td (the claim, and the Provider is not liable for indirect or consequential loss. The Customer shall) Tj ET
+BT /F1 11 Tf 64 196 Td (indemnify the Provider against all claims, losses and costs arising from the Customer's use of) Tj ET
+BT /F1 11 Tf 64 181 Td (the service, without limit.) Tj ET
+BT /F2 11 Tf 64 158 Td (9. Dispute Resolution) Tj ET
+BT /F1 11 Tf 64 142 Td (Any dispute shall be settled by binding arbitration in Delaware under the rules chosen by the) Tj ET
+BT /F1 11 Tf 64 127 Td (Provider. The Customer waives the right to bring or join any class action.) Tj ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Contents 6 0 R /Resources << /Font << /F1 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >> /F2 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >> >> >> >>
+endobj
+6 0 obj
+<< /Length 567 >>
+stream
+BT /F2 11 Tf 64 778 Td (10. Governing Law) Tj ET
+BT /F1 11 Tf 64 762 Td (These Terms are governed by the laws of the State of Delaware, without regard to conflict of) Tj ET
+BT /F1 11 Tf 64 747 Td (law rules.) Tj ET
+BT /F2 11 Tf 64 724 Td (11. Entire Agreement) Tj ET
+BT /F1 11 Tf 64 708 Td (These Terms are the entire agreement between the parties and replace all earlier agreements) Tj ET
+BT /F1 11 Tf 64 693 Td (on the same subject.) Tj ET
+BT /F1 11 Tf 64 670 Td (Accepted on 2026-11-01.) Tj ET
+BT /F1 11 Tf 64 647 Td (Sofia Bergman, for Ridgeline Studio AB) Tj ET
+endstream
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000121 00000 n 
+0000000414 00000 n 
+0000003943 00000 n 
+0000004236 00000 n 
+trailer
+<< /Size 7 /Root 1 0 R >>
+startxref
+4853
+%%EOF

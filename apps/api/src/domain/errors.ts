@@ -38,3 +38,27 @@ export class LlmOutputInvalidError extends DomainError {
     super('The AI returned a response that could not be used', options);
   }
 }
+
+export class LlmRequestFailedError extends DomainError {
+  readonly code = 'LLM_REQUEST_FAILED';
+
+  constructor(options?: ErrorOptions) {
+    super('The AI service could not be reached', options);
+  }
+}
+
+export class DocumentTooLongError extends DomainError {
+  readonly code = 'DOCUMENT_TOO_LONG';
+
+  constructor(options?: ErrorOptions) {
+    super('The document is too long to analyse', options);
+  }
+}
+
+export class InvalidRequestError extends DomainError {
+  readonly code = 'INVALID_REQUEST';
+
+  constructor(message: string, options?: ErrorOptions) {
+    super(message, options);
+  }
+}

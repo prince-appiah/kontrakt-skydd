@@ -1,0 +1,124 @@
+{
+  "summary": "These terms are heavily one-sided in favour of the Provider. The Customer pays a non-refundable annual fee in advance, is locked in by a long notice period for non-renewal, and can see prices rise sharply, while the Provider can change the terms, suspend or end the service at will, and take broad rights over your data. Liability is almost entirely shifted to you, and disputes must go to arbitration in Delaware. You should negotiate several of these clauses before signing.",
+  "text": "SOFTWARE-AS-A-SERVICE TERMS\nThese Terms are entered into on 2026-11-01 between Cloudhaven Software Inc. (the\n\"Provider\"), 500 Example Avenue, Suite 12, Wilmington, and Ridgeline Studio AB (org. no.\n559104-7788), Sjögatan 3, 211 20 Malmö (the \"Customer\"), represented by Sofia Bergman,\nemail sofia.bergman@example.test, phone +46 73 555 03 45.\n1. Subscription and Fees\nThe Customer subscribes to the Provider's platform for an annual fee of USD 2,400, invoiced in\nadvance to the account IBAN SE35 5000 0000 0549 1000 0003 designated by the Provider. All\nfees are non-refundable.\n2. Term and Renewal\nThe initial term is 12 months. The subscription renews automatically for successive 12-month\nperiods unless the Customer gives written notice of non-renewal at least 90 days before the end\nof the current term.\n3. Price Changes\nThe Provider may increase the fees by up to 30% at each renewal by giving the Customer 15\ndays notice.\n4. Changes to These Terms\nThe Provider may change these Terms or the service at any time. Continued use of the service\nafter a change counts as acceptance of the change.\n5. Customer Data\nThe Customer grants the Provider a perpetual, worldwide, irrevocable licence to use, copy and\nanalyse all data uploaded to the service, including for training machine learning models and for\nsharing with the Provider's partners.\n6. Availability\nThe service is provided \"as is\" and \"as available\". The Provider gives no guarantee of uptime,\nperformance or data retention, and is not liable for any loss of data.\n7. Suspension and Termination\nThe Provider may suspend the service at any time and may terminate this Agreement for\nconvenience with 7 days notice, without any refund. The Customer may terminate only at the\nend of the current term.\n8. Limitation of Liability\nThe Provider's total liability is limited to the fees paid by the Customer in the month preceding\nthe claim, and the Provider is not liable for indirect or consequential loss. The Customer shall\nindemnify the Provider against all claims, losses and costs arising from the Customer's use of\nthe service, without limit.\n9. Dispute Resolution\nAny dispute shall be settled by binding arbitration in Delaware under the rules chosen by the\nProvider. The Customer waives the right to bring or join any class action.\n\n10. Governing Law\nThese Terms are governed by the laws of the State of Delaware, without regard to conflict of\nlaw rules.\n11. Entire Agreement\nThese Terms are the entire agreement between the parties and replace all earlier agreements\non the same subject.\nAccepted on 2026-11-01.\nSofia Bergman, for Ridgeline Studio AB\n\n",
+  "redactedText": "SOFTWARE-AS-A-SERVICE TERMS\nThese Terms are entered into on 2026-11-01 between [ORG_1]. (the\n\"Provider\"), [ADDRESS_1], Suite 12, Wilmington, and [ORG_2] (org. no.\n[PERSONNUMMER_1]), [ADDRESS_2], [POSTCODE_1] Malmö (the \"Customer\"), represented by [PERSON_1],\nemail [EMAIL_1], phone [PHONE_1].\n1. Subscription and Fees\nThe Customer subscribes to the Provider's platform for an annual fee of [AMOUNT_1], invoiced in\nadvance to the account IBAN [IBAN_1] designated by the Provider. All\nfees are non-refundable.\n2. Term and Renewal\nThe initial term is 12 months. The subscription renews automatically for successive 12-month\nperiods unless the Customer gives written notice of non-renewal at least 90 days before the end\nof the current term.\n3. Price Changes\nThe Provider may increase the fees by up to 30% at each renewal by giving the Customer 15\ndays notice.\n4. Changes to These Terms\nThe Provider may change these Terms or the service at any time. Continued use of the service\nafter a change counts as acceptance of the change.\n5. Customer Data\nThe Customer grants the Provider a perpetual, worldwide, irrevocable licence to use, copy and\nanalyse all data uploaded to the service, including for training machine learning models and for\nsharing with the Provider's partners.\n6. Availability\nThe service is provided \"as is\" and \"as available\". The Provider gives no guarantee of uptime,\nperformance or data retention, and is not liable for any loss of data.\n7. Suspension and Termination\nThe Provider may suspend the service at any time and may terminate this Agreement for\nconvenience with 7 days notice, without any refund. The Customer may terminate only at the\nend of the current term.\n8. Limitation of Liability\nThe Provider's total liability is limited to the fees paid by the Customer in the month preceding\nthe claim, and the Provider is not liable for indirect or consequential loss. The Customer shall\nindemnify the Provider against all claims, losses and costs arising from the Customer's use of\nthe service, without limit.\n9. Dispute Resolution\nAny dispute shall be settled by binding arbitration in Delaware under the rules chosen by the\nProvider. The Customer waives the right to bring or join any class action.\n\n10. Governing Law\nThese Terms are governed by the laws of the State of Delaware, without regard to conflict of\nlaw rules.\n11. Entire Agreement\nThese Terms are the entire agreement between the parties and replace all earlier agreements\non the same subject.\nAccepted on 2026-11-01.\n[PERSON_1], for [ORG_2]\n\n",
+  "clauses": [
+    {
+      "quote": "All\nfees are non-refundable.",
+      "category": "payment",
+      "risk": "medium",
+      "explanation": "You pay a full year in advance and get nothing back whatever happens. Combined with the Provider's right to end the contract on 7 days notice, you could pay for a year and lose the service almost immediately with no money returned.",
+      "counterClause": "Fees are non-refundable except where the Provider suspends or terminates the service other than for the Customer's material breach, or fails to provide the service, in which case the Provider shall refund the fees for the unused part of the term pro rata.",
+      "start": 549,
+      "end": 577
+    },
+    {
+      "quote": "The subscription renews automatically for successive 12-month\nperiods unless the Customer gives written notice of non-renewal at least 90 days before the end\nof the current term.",
+      "category": "auto_renewal",
+      "risk": "high",
+      "explanation": "The contract renews for another full year by default, and you must give notice a full three months in advance to stop it. If you miss that window you are locked in and must pay for another year, which is easy to overlook.",
+      "counterClause": "The subscription renews for successive 12-month periods unless either party gives written notice of non-renewal at least 30 days before the end of the current term. The Provider shall remind the Customer in writing between 60 and 90 days before the notice deadline.",
+      "start": 629,
+      "end": 807
+    },
+    {
+      "quote": "The Provider may increase the fees by up to 30% at each renewal by giving the Customer 15\ndays notice.",
+      "category": "payment",
+      "risk": "high",
+      "explanation": "The Provider can raise the price by up to 30% every renewal. Because the notice is only 15 days, and you must give non-renewal notice 90 days before term end, you would learn of the increase after you have already lost the right to cancel. You would be forced to pay it.",
+      "counterClause": "The Provider may increase the fees at renewal by no more than the annual change in a named consumer price index, or 5%, whichever is lower, and only by giving the Customer written notice at least 120 days before the end of the current term.",
+      "start": 825,
+      "end": 927
+    },
+    {
+      "quote": "The Provider may change these Terms or the service at any time.",
+      "category": "other",
+      "risk": "high",
+      "explanation": "The Provider can rewrite the contract or change the service whenever it wants, without your agreement and, as the next sentence says, simply because you keep using it. Any protection you negotiate could be removed later.",
+      "counterClause": "The Provider may change these Terms or the service only by giving the Customer at least 60 days written notice. If the change is materially adverse to the Customer, the Customer may terminate and receive a pro rata refund of prepaid fees.",
+      "start": 954,
+      "end": 1017
+    },
+    {
+      "quote": "Continued use of the service\nafter a change counts as acceptance of the change.",
+      "category": "other",
+      "risk": "medium",
+      "explanation": "Just using the service is treated as agreeing to new terms, even if you never saw or read them. This makes it easy for unfavourable changes to bind you.",
+      "counterClause": "Changes to these Terms bind the Customer only if the Customer has accepted them in writing or has not objected within 60 days after receiving written notice of the change.",
+      "start": 1018,
+      "end": 1097
+    },
+    {
+      "quote": "The Customer grants the Provider a perpetual, worldwide, irrevocable licence to use, copy and\nanalyse all data uploaded to the service, including for training machine learning models and for\nsharing with the Provider's partners.",
+      "category": "ip",
+      "risk": "high",
+      "explanation": "The Provider can keep and use all your data forever, even after you leave, train AI models with it and share it with unnamed partners. This could expose confidential business information or personal data and may conflict with data protection law such as GDPR.",
+      "counterClause": "The Customer retains all rights in its data. The Customer grants the Provider a limited licence, for the duration of the subscription only, to process the data solely to provide the service to the Customer. The Provider shall not use the data to train models or share it with third parties without the Customer's prior written consent, and shall delete the data on termination.",
+      "start": 1115,
+      "end": 1343
+    },
+    {
+      "quote": "The Provider gives no guarantee of uptime,\nperformance or data retention, and is not liable for any loss of data.",
+      "category": "liability",
+      "risk": "high",
+      "explanation": "The Provider promises nothing about the service being available or working, and is not responsible even if your data is lost. You pay a full year in advance with no recourse if the service is down or your data disappears.",
+      "counterClause": "The Provider shall make the service available at least 99.5% of each month, shall maintain regular backups, and shall be liable for loss of Customer data caused by its failure to follow reasonable security and backup practices. If the uptime target is missed, the Customer is entitled to service credits and may terminate for repeated failure.",
+      "start": 1412,
+      "end": 1525
+    },
+    {
+      "quote": "The Provider may suspend the service at any time and may terminate this Agreement for\nconvenience with 7 days notice, without any refund.",
+      "category": "termination",
+      "risk": "high",
+      "explanation": "The Provider can switch off your access at any moment for any reason, or end the contract with only a week's notice, and keep all the money you prepaid. You would have little time to move to another system.",
+      "counterClause": "The Provider may suspend the service only for the Customer's material breach or a security threat, and only after reasonable written notice where practicable. The Provider may terminate for convenience only with at least 90 days written notice and shall refund prepaid fees for the unused period pro rata.",
+      "start": 1556,
+      "end": 1693
+    },
+    {
+      "quote": "The Customer may terminate only at the\nend of the current term.",
+      "category": "termination",
+      "risk": "high",
+      "explanation": "You have no way out during the year, even if the Provider breaks the contract or the service is poor, while the Provider can leave on 7 days notice. The exit rights are very unbalanced.",
+      "counterClause": "Either party may terminate this Agreement immediately by written notice if the other party commits a material breach and fails to remedy it within 30 days. The Customer may also terminate for convenience on 60 days written notice.",
+      "start": 1694,
+      "end": 1757
+    },
+    {
+      "quote": "The Provider's total liability is limited to the fees paid by the Customer in the month preceding\nthe claim, and the Provider is not liable for indirect or consequential loss.",
+      "category": "liability",
+      "risk": "high",
+      "explanation": "Even if the Provider causes serious harm, the most you could recover is about one month of fees, which is a small fraction of the annual price. Indirect losses such as lost profit are excluded entirely.",
+      "counterClause": "The Provider's total liability is limited to the fees paid by the Customer in the 12 months preceding the claim. This limit does not apply to data breaches, breach of confidentiality, gross negligence, wilful misconduct, or liability that cannot be limited by law.",
+      "start": 1785,
+      "end": 1960
+    },
+    {
+      "quote": "The Customer shall\nindemnify the Provider against all claims, losses and costs arising from the Customer's use of\nthe service, without limit.",
+      "category": "liability",
+      "risk": "high",
+      "explanation": "You must cover all the Provider's costs and claims linked to your use of the service, with no cap, while the Provider's own liability is tiny. This could expose you to unlimited financial risk, even for problems the Provider caused.",
+      "counterClause": "The Customer shall indemnify the Provider against third-party claims arising from the Customer's unlawful use of the service or breach of these Terms, excluding claims caused by the Provider's acts or omissions, and subject to the same liability cap that applies to the Provider.",
+      "start": 1961,
+      "end": 2102
+    },
+    {
+      "quote": "Any dispute shall be settled by binding arbitration in Delaware under the rules chosen by the\nProvider.",
+      "category": "other",
+      "risk": "high",
+      "explanation": "You must resolve disputes in a distant US state, under rules the Provider picks, with no right to go to court. This makes a claim expensive and gives the Provider control over the process.",
+      "counterClause": "Any dispute shall be settled by arbitration under the rules of a recognised neutral arbitration institution agreed by both parties, with the seat in the Customer's home country or by video conference, and costs shared fairly.",
+      "start": 2125,
+      "end": 2228
+    },
+    {
+      "quote": "The Customer waives the right to bring or join any class action.",
+      "category": "other",
+      "risk": "low",
+      "explanation": "You give up the chance to join with other customers in a group claim, which can make small or shared problems impractical to pursue.",
+      "counterClause": "Nothing in these Terms prevents the Customer from bringing or joining collective or representative proceedings where permitted by applicable law.",
+      "start": 2229,
+      "end": 2293
+    }
+  ]
+}

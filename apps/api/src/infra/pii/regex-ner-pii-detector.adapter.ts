@@ -9,7 +9,7 @@ const REGEX_RULES: ReadonlyArray<{ type: PiiType; pattern: RegExp }> = [
   },
   {
     type: 'IBAN',
-    pattern: /\b[A-Z]{2}\d{2}(?: ?[A-Z0-9]{4}){3,7}(?: ?[A-Z0-9]{1,3})?\b/g,
+    pattern: /\b[A-Z]{2}\d{2}(?:\s?[A-Z0-9]{4}){3,7}(?:\s?[A-Z0-9]{1,3})?\b/g,
   },
   {
     type: 'PERSONNUMMER',
@@ -23,11 +23,11 @@ const REGEX_RULES: ReadonlyArray<{ type: PiiType; pattern: RegExp }> = [
   {
     type: 'AMOUNT',
     pattern:
-      /\b\d+(?:[  .,]\d{3})*(?:[.,]\d{1,2})?\s?(?:SEK|NOK|DKK|EUR|USD|GBP|kr|kronor|euro|dollars?)\b|[€$£]\s?\d+(?:[  .,]\d{3})*(?:[.,]\d{1,2})?/gi,
+      /\b\d+(?:[\s.,]\d{3})*(?:[.,]\d{1,2})?\s?(?:SEK|NOK|DKK|EUR|USD|GBP|kr|kronor|euro|dollars?)\b|[€$£]\s?\d+(?:[\s.,]\d{3})*(?:[.,]\d{1,2})?|\b(?:SEK|NOK|DKK|EUR|USD|GBP)\s?\d+(?:[\s.,]\d{3})*(?:[.,]\d{1,2})?/gi,
   },
   {
     type: 'POSTCODE',
-    pattern: /\b\d{3} ?\d{2}\b(?=\s+\p{Lu}\p{Ll}+)/gu,
+    pattern: /\b\d{3}\s?\d{2}\b(?=\s+\p{Lu}\p{Ll}+)/gu,
   },
   {
     type: 'ADDRESS',
@@ -103,23 +103,14 @@ function toMatches(
 }
 
 function findWithNer(text: string): PiiMatch[] {
-  return splitForNer(text).flatMap(({ offset, chunk }) => {
-    const doc = nlp(chunk);
-    return [
-      ...toMatches(
-        chunk,
-        offset,
-        doc.people().json({ offset: true }),
-        'PERSON',
-      ),
-      ...toMatches(
-        chunk,
-        offset,
-        doc.organizations().json({ offset: true }),
-        'ORG',
-      ),
-    ];
-  });
+  return splitForNer(text).flatMap(({ offset, chunk }) =>
+    toMatches(
+      chunk,
+      offset,
+      nlp(chunk).people().json({ offset: true }),
+      'PERSON',
+    ),
+  );
 }
 
 function keepNonOverlapping(

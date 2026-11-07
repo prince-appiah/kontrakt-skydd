@@ -1,0 +1,115 @@
+{
+  "summary": "This contract is heavily one-sided against the Consultant. It lets the Client change the work without changing the pay, delay and withhold payment, take ownership of everything you create (even outside this job), restrict you from other work during and for five years after the contract, and hold you to unlimited liability while its own is almost nil. You should not sign without major changes, especially to the IP, non-compete, liability, termination and payment clauses.",
+  "text": "FREELANCE SERVICES AGREEMENT\nThis Agreement is made on 2026-11-01 between Kvarnby Digital AB (org. no. 556781-2340),\nHamngatan 31, 411 05 Kvarnby (the \"Client\"), and Anders Wikström, personnummer\n880927-0456, email anders.wikstrom@example.test, phone 070-555 02 34 (the \"Consultant\").\n1. Services\nThe Consultant shall develop and maintain software for the Client as instructed from time to\ntime by Johanna Lund, Head of Product at the Client. The Client may change the scope,\ndeadlines and priorities at any time without adjusting the fee.\n2. Term and Renewal\nThis Agreement runs for 12 months from 2026-11-01 and renews automatically for successive\n12-month periods unless the Consultant gives written notice of non-renewal at least 180 days\nbefore the end of the current period. The Client may end the renewal at any time.\n3. Fees and Payment\nThe Client shall pay the Consultant 48 000 SEK per month to IBAN SE35 5000 0000 0549 1000\n0003. Invoices are payable within 90 days of receipt. The Client may withhold payment for any\nwork it considers unsatisfactory in its sole discretion.\n4. Intellectual Property\nAll work product, ideas, tools and know-how created or used by the Consultant during the term,\nincluding work created before the term or outside the services, belongs exclusively to the Client\nwithout further compensation. The Consultant waives all moral rights.\n5. Exclusivity\nDuring the term the Consultant shall not perform services for any other client without the Client's\nprior written consent, which the Client may refuse at its discretion.\n6. Termination\nThe Client may terminate this Agreement at any time without notice or liability. The Consultant\nmay terminate only for a material breach by the Client that remains uncured for 120 days after\nwritten notice.\n7. Liability\nThe Consultant is liable without limit for all direct and indirect losses of the Client, including lost\nprofits and loss of goodwill. The Client's liability is limited to the fees paid in the preceding\nmonth.\n8. Non-Compete\nFor five years after termination the Consultant shall not work for any company in the software\nindustry anywhere in the world.\n9. Confidentiality\nEach party shall keep the other party's confidential information secret and use it only for the\npurposes of this Agreement. This obligation continues for three years after termination.\n\n10. Governing Law\nThis Agreement is governed by Swedish law. Disputes shall be settled by the courts of\nGothenburg.\nSigned in two copies on 2026-11-01.\nAnders Wikström, Consultant\nJohanna Lund, for Kvarnby Digital AB\n\n",
+  "redactedText": "FREELANCE SERVICES AGREEMENT\nThis Agreement is made on 2026-11-01 between [ORG_1] (org. no. [PERSONNUMMER_1]),\n[ADDRESS_1], [POSTCODE_1] Kvarnby (the \"Client\"), and [PERSON_1], personnummer\n[PERSONNUMMER_2], email [EMAIL_1], phone [PHONE_1] (the \"Consultant\").\n1. Services\nThe Consultant shall develop and maintain software for the Client as instructed from time to\ntime by [PERSON_2], Head of Product at the Client. The Client may change the scope,\ndeadlines and priorities at any time without adjusting the fee.\n2. Term and Renewal\nThis Agreement runs for 12 months from 2026-11-01 and renews automatically for successive\n12-month periods unless the Consultant gives written notice of non-renewal at least 180 days\nbefore the end of the current period. The Client may end the renewal at any time.\n3. Fees and Payment\nThe Client shall pay the Consultant [AMOUNT_1] per month to IBAN [IBAN_1]. Invoices are payable within 90 days of receipt. The Client may withhold payment for any\nwork it considers unsatisfactory in its sole discretion.\n4. Intellectual Property\nAll work product, ideas, tools and know-how created or used by the Consultant during the term,\nincluding work created before the term or outside the services, belongs exclusively to the Client\nwithout further compensation. The Consultant waives all moral rights.\n5. Exclusivity\nDuring the term the Consultant shall not perform services for any other client without the Client's\nprior written consent, which the Client may refuse at its discretion.\n6. Termination\nThe Client may terminate this Agreement at any time without notice or liability. The Consultant\nmay terminate only for a material breach by the Client that remains uncured for 120 days after\nwritten notice.\n7. Liability\nThe Consultant is liable without limit for all direct and indirect losses of the Client, including lost\nprofits and loss of goodwill. The Client's liability is limited to the fees paid in the preceding\nmonth.\n8. Non-Compete\nFor five years after termination the Consultant shall not work for any company in the software\nindustry anywhere in the world.\n9. Confidentiality\nEach party shall keep the other party's confidential information secret and use it only for the\npurposes of this Agreement. This obligation continues for three years after termination.\n\n10. Governing Law\nThis Agreement is governed by Swedish law. Disputes shall be settled by the courts of\nGothenburg.\nSigned in two copies on 2026-11-01.\n[PERSON_1], Consultant\n[PERSON_2], for [ORG_1]\n\n",
+  "clauses": [
+    {
+      "quote": "The Client may change the scope,\ndeadlines and priorities at any time without adjusting the fee.",
+      "category": "other",
+      "risk": "medium",
+      "explanation": "The Client can pile on more work or shorten deadlines at any time and you still get the same monthly fee. You could end up doing far more work for no extra money.",
+      "counterClause": "The Client may request changes to scope, deadlines or priorities, but any change that materially increases the workload or cost to the Consultant requires a written agreement adjusting the fee and timeline.",
+      "start": 443,
+      "end": 539
+    },
+    {
+      "quote": "This Agreement runs for 12 months from 2026-11-01 and renews automatically for successive\n12-month periods unless the Consultant gives written notice of non-renewal at least 180 days\nbefore the end of the current period.",
+      "category": "auto_renewal",
+      "risk": "high",
+      "explanation": "The contract renews by itself for another full year unless you give notice about six months before the end. If you miss that window you are locked in for another 12 months, while the Client can walk away at any time.",
+      "counterClause": "This Agreement runs for 12 months and renews for successive 12-month periods unless either party gives written notice of non-renewal at least 30 days before the end of the current period. The Client shall remind the Consultant in writing of the renewal date at least 60 days beforehand.",
+      "start": 560,
+      "end": 780
+    },
+    {
+      "quote": "Invoices are payable within 90 days of receipt.",
+      "category": "payment",
+      "risk": "medium",
+      "explanation": "Waiting 90 days to be paid is very long for a freelancer and can cause cash-flow problems. There is also no late-payment interest.",
+      "counterClause": "Invoices are payable within 30 days of receipt. Overdue amounts accrue interest at the statutory late-payment rate.",
+      "start": 941,
+      "end": 988
+    },
+    {
+      "quote": "The Client may withhold payment for any\nwork it considers unsatisfactory in its sole discretion.",
+      "category": "payment",
+      "risk": "high",
+      "explanation": "The Client alone decides whether work is good enough to be paid for, with no objective standard, no notice and no chance for you to fix it. It could refuse to pay for finished work.",
+      "counterClause": "The Client may withhold payment only for specific work that fails to meet agreed written specifications, and only after giving the Consultant written notice with reasons and 14 days to correct it. Undisputed amounts must be paid on time.",
+      "start": 989,
+      "end": 1085
+    },
+    {
+      "quote": "All work product, ideas, tools and know-how created or used by the Consultant during the term,\nincluding work created before the term or outside the services, belongs exclusively to the Client\nwithout further compensation.",
+      "category": "ip",
+      "risk": "high",
+      "explanation": "This hands the Client ownership of things you made before this job, your own tools and know-how, and work unrelated to the Client. You could lose the right to reuse your own code and methods for other customers.",
+      "counterClause": "Only work product created specifically for the Client under this Agreement and paid for in full transfers to the Client. The Consultant retains all pre-existing materials, tools and know-how, and grants the Client a non-exclusive licence to use any such items embedded in the deliverables.",
+      "start": 1111,
+      "end": 1333
+    },
+    {
+      "quote": "The Consultant waives all moral rights.",
+      "category": "ip",
+      "risk": "low",
+      "explanation": "You give up the right to be credited as the author and to object to changes of your work. This may matter if you want to show the work in a portfolio.",
+      "counterClause": "The Consultant retains the right to be named as author where reasonable and to describe the work in a portfolio, subject to confidentiality obligations.",
+      "start": 1334,
+      "end": 1373
+    },
+    {
+      "quote": "During the term the Consultant shall not perform services for any other client without the Client's\nprior written consent, which the Client may refuse at its discretion.",
+      "category": "non_compete",
+      "risk": "high",
+      "explanation": "You cannot take other clients while the contract runs, yet you are paid only a fixed monthly fee and can be dropped at any time. This can leave you with all your income depending on one party.",
+      "counterClause": "The Consultant may perform services for other clients provided this does not materially interfere with the services under this Agreement or involve the use of the Client's confidential information, and does not involve a direct competitor of the Client.",
+      "start": 1389,
+      "end": 1558
+    },
+    {
+      "quote": "The Client may terminate this Agreement at any time without notice or liability.",
+      "category": "termination",
+      "risk": "high",
+      "explanation": "The Client can end the contract instantly, with no warning and no compensation, leaving you without income overnight.",
+      "counterClause": "The Client may terminate this Agreement by giving the Consultant at least 60 days' written notice, and shall pay all fees for work performed up to the termination date and for the notice period.",
+      "start": 1574,
+      "end": 1654
+    },
+    {
+      "quote": "The Consultant\nmay terminate only for a material breach by the Client that remains uncured for 120 days after\nwritten notice.",
+      "category": "termination",
+      "risk": "high",
+      "explanation": "You can only leave if the Client seriously breaches the contract and then fails to fix it for four months. Until then you are stuck, even if you are not being paid.",
+      "counterClause": "The Consultant may terminate this Agreement by giving 60 days' written notice, or immediately if the Client commits a material breach that remains uncured 14 days after written notice, including non-payment.",
+      "start": 1655,
+      "end": 1780
+    },
+    {
+      "quote": "The Consultant is liable without limit for all direct and indirect losses of the Client, including lost\nprofits and loss of goodwill.",
+      "category": "liability",
+      "risk": "high",
+      "explanation": "You could be forced to pay for every loss the Client claims, including lost profits and reputation damage, far beyond what you earn. This could be financially ruinous.",
+      "counterClause": "The Consultant's total liability under this Agreement is limited to the fees paid to the Consultant in the 12 months before the claim, and the Consultant is not liable for indirect or consequential losses, lost profits or loss of goodwill, except in cases of intent or gross negligence.",
+      "start": 1794,
+      "end": 1927
+    },
+    {
+      "quote": "The Client's liability is limited to the fees paid in the preceding\nmonth.",
+      "category": "liability",
+      "risk": "high",
+      "explanation": "If the Client causes you harm, the most you could recover is one month of fees. The limits are wildly uneven in the Client's favour.",
+      "counterClause": "Each party's liability is limited to the same amount, being the fees paid or payable under this Agreement in the 12 months before the claim, except in cases of intent or gross negligence.",
+      "start": 1928,
+      "end": 2002
+    },
+    {
+      "quote": "For five years after termination the Consultant shall not work for any company in the software\nindustry anywhere in the world.",
+      "category": "non_compete",
+      "risk": "high",
+      "explanation": "For five years after the contract ends you could not work for any software company anywhere. As a software developer this could effectively shut you out of your profession, and it is unlikely to be reasonable, and there is no compensation.",
+      "counterClause": "For six months after termination the Consultant shall not provide services to a named direct competitor of the Client, and the Client shall pay the Consultant compensation for the restricted period equal to the monthly fee.",
+      "start": 2018,
+      "end": 2144
+    }
+  ]
+}

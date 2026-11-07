@@ -1,0 +1,106 @@
+{
+  "summary": "This lease is heavily one-sided against you as the Tenant. The Landlord can end the lease on 30 days' notice or raise the rent by any amount, while you are locked in for 24 months, auto-renewed for 24 more, and charged a 6-month penalty if you leave early. You also carry unlimited liability and all repair costs, and the Landlord can enter at any time. Do not sign without major changes, and check which of these terms Swedish tenancy law would override.",
+  "text": "RESIDENTIAL LEASE AGREEMENT\nThis Lease Agreement is made on 2026-11-01 between Tallbacken Fastighets AB (org. no.\n559012-3456), Björkvägen 7, 123 45 Solvik (the \"Landlord\"), and Elin Sandberg, personnummer\n920214-0123, email elin.sandberg@example.test, phone +46 70 555 01 23 (the \"Tenant\").\n1. Premises and Term\nThe Landlord leases to the Tenant the apartment at Fjärdingsvägen 22, apartment 1204, 123\n46 Solvik (the \"Premises\"). The lease runs for a fixed term of 24 months from 2026-12-01. It\nrenews automatically for further periods of 24 months unless the Tenant gives written notice of\nnon-renewal at least 6 months before the end of the current period. The Landlord is not required\nto give any notice of non-renewal.\n2. Rent and Payment\nThe Tenant shall pay rent of 12 500 SEK per month in advance, no later than the 25th day of\nthe preceding month, to IBAN SE35 5000 0000 0549 1000 0003. If any payment is late, the\nTenant shall pay a late fee of 5% of the monthly rent for each day of delay, in addition to\nstatutory interest.\n3. Rent Increases\nThe Landlord may increase the rent at any time, by any amount, by giving the Tenant 14 days\nwritten notice. The Tenant has no right to object to a rent increase.\n4. Security Deposit\nOn signing, the Tenant shall pay a security deposit of 37 500 SEK. The deposit does not bear\ninterest. The Landlord shall return the deposit within 120 days after the lease ends, less any\ndeductions that the Landlord decides, in its sole discretion, are justified.\n5. Use of the Premises\nThe Premises may be used only as a private residence for the Tenant. Pets are not permitted.\nThe Tenant may not sublet or lend the Premises, or any part of it, under any circumstances.\nThe Landlord may enter the Premises at any time and without notice.\n6. Maintenance and Repairs\nThe Tenant is responsible for the cost of all maintenance and repairs of the Premises and its\nfixtures, including appliances, plumbing, heating and structural defects, regardless of their\ncause.\n7. Termination\nThe Landlord may terminate this Agreement at any time, for any reason, by giving the Tenant\n30 days written notice. The Tenant may terminate this Agreement only at the end of the fixed\nterm or a renewal period, by giving 6 months written notice. If the Tenant leaves earlier, the\nTenant shall pay an early termination fee equal to 6 months rent.\n8. Liability\nThe Tenant is liable without limit for all damage to the Premises, including normal wear and\ntear. The Landlord is not liable for any loss of or damage to the Tenant's belongings, or for any\ninjury suffered in the Premises or the building, even if caused by the Landlord's negligence.\n\n9. Notices\nNotices under this Agreement shall be given in writing to the addresses stated above or to any\nother address that a party has notified in writing.\n10. Governing Law\nThis Agreement is governed by Swedish law. Any dispute shall be settled by the district court in\nthe location of the Premises.\nSigned in two copies on 2026-11-01.\nElin Sandberg, Tenant\nMarcus Holm, Property Manager, for Tallbacken Fastighets AB\n\n",
+  "redactedText": "RESIDENTIAL LEASE AGREEMENT\nThis Lease Agreement is made on 2026-11-01 between [ORG_1] (org. no.\n[PERSONNUMMER_1]), [ADDRESS_1], [POSTCODE_1] Solvik (the \"Landlord\"), and [PERSON_1], personnummer\n[PERSONNUMMER_2], email [EMAIL_1], phone [PHONE_1] (the \"Tenant\").\n1. Premises and Term\nThe Landlord leases to the Tenant the apartment at [ADDRESS_2], apartment 1204, [POSTCODE_2] Solvik (the \"Premises\"). The lease runs for a fixed term of 24 months from 2026-12-01. It\nrenews automatically for further periods of 24 months unless the Tenant gives written notice of\nnon-renewal at least 6 months before the end of the current period. The Landlord is not required\nto give any notice of non-renewal.\n2. Rent and Payment\nThe Tenant shall pay rent of [AMOUNT_1] per month in advance, no later than the 25th day of\nthe preceding month, to IBAN [IBAN_1]. If any payment is late, the\nTenant shall pay a late fee of 5% of the monthly rent for each day of delay, in addition to\nstatutory interest.\n3. Rent Increases\nThe Landlord may increase the rent at any time, by any amount, by giving the Tenant 14 days\nwritten notice. The Tenant has no right to object to a rent increase.\n4. Security Deposit\nOn signing, the Tenant shall pay a security deposit of [AMOUNT_2]. The deposit does not bear\ninterest. The Landlord shall return the deposit within 120 days after the lease ends, less any\ndeductions that the Landlord decides, in its sole discretion, are justified.\n5. Use of the Premises\nThe Premises may be used only as a private residence for the Tenant. Pets are not permitted.\nThe Tenant may not sublet or lend the Premises, or any part of it, under any circumstances.\nThe Landlord may enter the Premises at any time and without notice.\n6. Maintenance and Repairs\nThe Tenant is responsible for the cost of all maintenance and repairs of the Premises and its\nfixtures, including appliances, plumbing, heating and structural defects, regardless of their\ncause.\n7. Termination\nThe Landlord may terminate this Agreement at any time, for any reason, by giving the Tenant\n30 days written notice. The Tenant may terminate this Agreement only at the end of the fixed\nterm or a renewal period, by giving 6 months written notice. If the Tenant leaves earlier, the\nTenant shall pay an early termination fee equal to 6 months rent.\n8. Liability\nThe Tenant is liable without limit for all damage to the Premises, including normal wear and\ntear. The Landlord is not liable for any loss of or damage to the Tenant's belongings, or for any\ninjury suffered in the Premises or the building, even if caused by the Landlord's negligence.\n\n9. Notices\nNotices under this Agreement shall be given in writing to the addresses stated above or to any\nother address that a party has notified in writing.\n10. Governing Law\nThis Agreement is governed by Swedish law. Any dispute shall be settled by the district court in\nthe location of the Premises.\nSigned in two copies on 2026-11-01.\n[PERSON_1], Tenant\n[PERSON_2], Property Manager, for [ORG_1]\n\n",
+  "clauses": [
+    {
+      "quote": "It\nrenews automatically for further periods of 24 months unless the Tenant gives written notice of\nnon-renewal at least 6 months before the end of the current period. The Landlord is not required\nto give any notice of non-renewal.",
+      "category": "auto_renewal",
+      "risk": "high",
+      "explanation": "If you miss a deadline 6 months before the end of the term, you are locked in for another 24 months. The Landlord has no notice duty at all, so the rules are not equal. Combined with the early termination fee, a missed date could be very costly.",
+      "counterClause": "The lease renews for successive periods of 12 months unless either party gives written notice of non-renewal at least 3 months before the end of the current period. The Landlord shall remind the Tenant in writing of the notice deadline between 4 and 5 months before the end of the period.",
+      "start": 493,
+      "end": 723
+    },
+    {
+      "quote": "If any payment is late, the\nTenant shall pay a late fee of 5% of the monthly rent for each day of delay, in addition to\nstatutory interest.",
+      "category": "payment",
+      "risk": "high",
+      "explanation": "A 5% fee per day adds up to 150% of a month's rent after 30 days, on top of statutory interest. This is a penalty far beyond any real loss to the Landlord and could be challenged as unreasonable, but you should not have to fight over it.",
+      "counterClause": "If a payment is more than 7 days late, the Tenant shall pay statutory late-payment interest on the overdue amount. No other late fee applies.",
+      "start": 896,
+      "end": 1035
+    },
+    {
+      "quote": "The Landlord may increase the rent at any time, by any amount, by giving the Tenant 14 days\nwritten notice. The Tenant has no right to object to a rent increase.",
+      "category": "payment",
+      "risk": "high",
+      "explanation": "The Landlord can raise your rent by any amount on 14 days' notice, with no right for you to object. You could face a rent you cannot afford with almost no time to react or find another home.",
+      "counterClause": "The Landlord may increase the rent only once in any 12-month period, by a reasonable amount in line with comparable rents, and only by giving the Tenant at least 3 months written notice. The Tenant may object to an increase and have it reviewed under applicable law.",
+      "start": 1054,
+      "end": 1215
+    },
+    {
+      "quote": "The Landlord shall return the deposit within 120 days after the lease ends, less any\ndeductions that the Landlord decides, in its sole discretion, are justified.",
+      "category": "payment",
+      "risk": "high",
+      "explanation": "The Landlord has 120 days to return your deposit and can decide alone what to deduct. You have no way to challenge the deductions and no proof is required, so you could lose part or all of the deposit unfairly.",
+      "counterClause": "The Landlord shall return the deposit within 30 days after the lease ends. The Landlord may deduct only documented costs for damage beyond normal wear and tear, and shall provide an itemised statement with supporting evidence.",
+      "start": 1339,
+      "end": 1500
+    },
+    {
+      "quote": "The Tenant may not sublet or lend the Premises, or any part of it, under any circumstances.",
+      "category": "other",
+      "risk": "medium",
+      "explanation": "Because you are locked in for a long term, a total ban on subletting leaves you stuck paying rent if your life changes, for example a job move or illness.",
+      "counterClause": "The Tenant may sublet the Premises or part of them with the Landlord's prior written consent, which the Landlord shall not unreasonably withhold.",
+      "start": 1617,
+      "end": 1708
+    },
+    {
+      "quote": "The Landlord may enter the Premises at any time and without notice.",
+      "category": "other",
+      "risk": "high",
+      "explanation": "The Landlord can walk into your home at any hour without warning. This undermines your privacy and your right to peaceful enjoyment of your home.",
+      "counterClause": "The Landlord may enter the Premises only with at least 24 hours prior notice and at reasonable times, except in an emergency where immediate entry is needed to prevent damage or danger.",
+      "start": 1709,
+      "end": 1776
+    },
+    {
+      "quote": "The Tenant is responsible for the cost of all maintenance and repairs of the Premises and its\nfixtures, including appliances, plumbing, heating and structural defects, regardless of their\ncause.",
+      "category": "liability",
+      "risk": "high",
+      "explanation": "You would pay for every repair, even for structural problems, old equipment or faults you did not cause. These costs are normally the Landlord's responsibility as owner, and they could be very large and unpredictable.",
+      "counterClause": "The Landlord is responsible for maintenance and repairs of the Premises, including structural defects, plumbing, heating and installed appliances. The Tenant is responsible only for minor upkeep and for damage the Tenant has caused through negligence.",
+      "start": 1804,
+      "end": 1998
+    },
+    {
+      "quote": "The Landlord may terminate this Agreement at any time, for any reason, by giving the Tenant\n30 days written notice.",
+      "category": "termination",
+      "risk": "high",
+      "explanation": "The Landlord can end the lease at any time for any reason on 30 days' notice, so you could lose your home quickly even though you are bound for 24 months. This is very unbalanced and may conflict with tenant protection rules.",
+      "counterClause": "The Landlord may terminate this Agreement before the end of the term only for a material breach by the Tenant that remains uncured after written notice and a reasonable period to fix it, and in accordance with applicable law.",
+      "start": 2014,
+      "end": 2129
+    },
+    {
+      "quote": "The Tenant may terminate this Agreement only at the end of the fixed\nterm or a renewal period, by giving 6 months written notice. If the Tenant leaves earlier, the\nTenant shall pay an early termination fee equal to 6 months rent.",
+      "category": "termination",
+      "risk": "high",
+      "explanation": "You cannot leave during the term without paying 6 months' rent, and you must give 6 months' notice even to leave at the end. The Landlord has none of these limits. You could owe a very large sum if you have to move.",
+      "counterClause": "The Tenant may terminate this Agreement at any time by giving 3 months written notice. No early termination fee applies, and the Tenant is liable for rent only until the notice period ends.",
+      "start": 2130,
+      "end": 2359
+    },
+    {
+      "quote": "The Tenant is liable without limit for all damage to the Premises, including normal wear and\ntear.",
+      "category": "liability",
+      "risk": "high",
+      "explanation": "You would pay for all damage with no cap, and even for normal wear and tear such as faded paint or worn floors. That turns ordinary living into a cost.",
+      "counterClause": "The Tenant is liable only for damage to the Premises caused by the Tenant's negligence or misuse, and not for normal wear and tear. The Tenant's liability is limited to the documented cost of repair.",
+      "start": 2373,
+      "end": 2471
+    },
+    {
+      "quote": "The Landlord is not liable for any loss of or damage to the Tenant's belongings, or for any\ninjury suffered in the Premises or the building, even if caused by the Landlord's negligence.",
+      "category": "liability",
+      "risk": "high",
+      "explanation": "The Landlord escapes responsibility for your belongings and for injuries, even when the Landlord is at fault. If a faulty pipe floods your home or a hazard in the building hurts you, you could not claim anything. Such exclusions may also be unenforceable, but you should not rely on that.",
+      "counterClause": "The Landlord is liable for loss, damage or injury caused by the Landlord's negligence, by defects in the Premises or building that the Landlord was responsible for maintaining, or by the Landlord's breach of this Agreement.",
+      "start": 2472,
+      "end": 2657
+    }
+  ]
+}

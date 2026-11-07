@@ -1,6 +1,6 @@
 import type { PiiType } from '@/domain/ports';
 
-const TOKEN_PATTERN = /\[[A-Z]+_\d+\]/g;
+export const TOKEN_PATTERN = /\[[A-Z]+_\d+\]/g;
 
 export class RedactionMap {
   readonly #valueByToken = new Map<string, string>();
