@@ -1,5 +1,5 @@
-import "dotenv/config";
-import { z } from "zod";
+import 'dotenv/config';
+import { z } from 'zod';
 
 const baseEnvSchema = z.object({
   PORT: z.coerce.number().int().min(1).max(65535).default(3001),
@@ -8,17 +8,17 @@ const baseEnvSchema = z.object({
   OLLAMA_URL: z.url().optional(),
 });
 
-export const envSchema = z.discriminatedUnion("LLM_PROVIDER", [
+export const envSchema = z.discriminatedUnion('LLM_PROVIDER', [
   baseEnvSchema.extend({
-    LLM_PROVIDER: z.literal("anthropic"),
+    LLM_PROVIDER: z.literal('anthropic'),
     ANTHROPIC_API_KEY: z.string().min(1),
   }),
   baseEnvSchema.extend({
-    LLM_PROVIDER: z.literal("openai"),
+    LLM_PROVIDER: z.literal('openai'),
     OPENAI_API_KEY: z.string().min(1),
   }),
   baseEnvSchema.extend({
-    LLM_PROVIDER: z.literal("ollama"),
+    LLM_PROVIDER: z.literal('ollama'),
     OLLAMA_URL: z.url(),
   }),
 ]);
@@ -28,7 +28,9 @@ export type Env = z.infer<typeof envSchema>;
 const result = envSchema.safeParse(process.env);
 
 if (!result.success) {
-  throw new Error(`Invalid environment variables:\n${z.prettifyError(result.error)}`);
+  throw new Error(
+    `Invalid environment variables:\n${z.prettifyError(result.error)}`,
+  );
 }
 
 export const env: Env = result.data;
