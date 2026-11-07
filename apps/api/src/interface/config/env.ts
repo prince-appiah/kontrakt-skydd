@@ -6,6 +6,10 @@ const baseEnvSchema = z.object({
   WEB_ORIGIN: z.url().transform((value) => new URL(value).origin),
   LLM_MODEL: z.string().min(1),
   OLLAMA_URL: z.url().optional(),
+  TRUST_PROXY_HOPS: z.coerce.number().int().min(0).default(0),
+  RATE_LIMIT_PER_IP_PER_HOUR: z.coerce.number().int().min(1).default(3),
+  RATE_LIMIT_PER_DAY: z.coerce.number().int().min(1).default(50),
+  MAX_DOCUMENT_CHARACTERS: z.coerce.number().int().min(1).default(60_000),
 });
 
 export const envSchema = z.discriminatedUnion('LLM_PROVIDER', [

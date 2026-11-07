@@ -1,0 +1,27 @@
+services:
+  - type: web
+    runtime: docker
+    name: clause-guard-api
+    plan: free
+    region: frankfurt
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /api/v1/health
+    autoDeployTrigger: commit
+    envVars:
+      - key: LLM_PROVIDER
+        value: anthropic
+      - key: LLM_MODEL
+        value: claude-sonnet-5-5
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: WEB_ORIGIN
+        sync: false
+      - key: TRUST_PROXY_HOPS
+        value: 1
+      - key: RATE_LIMIT_PER_IP_PER_HOUR
+        value: 3
+      - key: RATE_LIMIT_PER_DAY
+        value: 50
+      - key: MAX_DOCUMENT_CHARACTERS
+        value: 60000

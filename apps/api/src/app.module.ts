@@ -19,10 +19,14 @@ import { AnthropicLlmAdapter } from '@/infra/llm/anthropic-llm.adapter';
 import { PdfDocxDocumentParserAdapter } from '@/infra/parsing/pdf-docx-document-parser.adapter';
 import { RegexNerPiiDetectorAdapter } from '@/infra/pii/regex-ner-pii-detector.adapter';
 import { env } from '@/interface/config/env';
-import { AnalysesController, GlobalExceptionFilter } from '@/interface/http';
+import {
+  AnalysesController,
+  GlobalExceptionFilter,
+  HealthController,
+} from '@/interface/http';
 
-const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000;
-const RATE_LIMIT_MAX_REQUESTS = 10;
+const HOUR_MS = 60 * 60 * 1000;
+const DAY_MS = 24 * HOUR_MS;
 
 @Module({
   imports: [
@@ -48,10 +52,20 @@ const RATE_LIMIT_MAX_REQUESTS = 10;
       },
     }),
     ThrottlerModule.forRoot([
-      { ttl: RATE_LIMIT_WINDOW_MS, limit: RATE_LIMIT_MAX_REQUESTS },
+      {
+        name: 'per-ip',
+        ttl: HOUR_MS,
+        limit: env.RATE_LIMIT_PER_IP_PER_HOUR,
+      },
+      {
+        name: 'daily-cap',
+        ttl: DAY_MS,
+        limit: env.RATE_LIMIT_PER_DAY,
+        getTracker: () => 'all-clients',
+      },
     ]),
   ],
-  controllers: [AnalysesController],
+  controllers: [AnalysesController, HealthController],
   providers: [
     { provide: APP_GUARD, useClass: ThrottlerGuard },
     { provide: APP_FILTER, useClass: GlobalExceptionFilter },
@@ -86,7 +100,14 @@ const RATE_LIMIT_MAX_REQUESTS = 10;
         redactor: Redactor,
         llm: LlmProvider,
         locator: ClauseLocator,
-      ) => new AnalyzeContractUseCase(parser, redactor, llm, locator),
+      ) =>
+        new AnalyzeContractUseCase(
+          parser,
+          redactor,
+          llm,
+          locator,
+          env.MAX_DOCUMENT_CHARACTERS,
+        ),
       inject: [DOCUMENT_PARSER, Redactor, LLM_PROVIDER, ClauseLocator],
     },
   ],

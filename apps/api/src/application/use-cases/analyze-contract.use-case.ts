@@ -18,14 +18,13 @@ export interface AnalyzeContractInput {
   readonly fileType: DocumentFileType;
 }
 
-const MAX_TEXT_LENGTH = 500_000;
-
 export class AnalyzeContractUseCase {
   constructor(
     private readonly parser: DocumentParser,
     private readonly redactor: Redactor,
     private readonly llm: LlmProvider,
     private readonly locator: ClauseLocator,
+    private readonly maxTextLength: number,
   ) {}
 
   async *execute(
@@ -34,7 +33,7 @@ export class AnalyzeContractUseCase {
   ): AsyncGenerator<AnalysisUpdate, void> {
     yield { type: 'progress', step: 'parsing' };
     const text = await this.parser.parse(data, fileType);
-    if (text.length > MAX_TEXT_LENGTH) {
+    if (text.length > this.maxTextLength) {
       throw new DocumentTooLongError();
     }
 

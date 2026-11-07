@@ -9,6 +9,7 @@ async function bootstrap() {
     bufferLogs: true,
   });
   app.disable('x-powered-by');
+  app.set('trust proxy', env.TRUST_PROXY_HOPS);
   app.useLogger(app.get(Logger));
   app.setGlobalPrefix('api/v1');
   app.enableCors({

@@ -7,12 +7,12 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { MAX_FILE_SIZE_BYTES } from '@clauseguard/shared';
 import type { Response } from 'express';
 import { PinoLogger } from 'nestjs-pino';
 import { AnalyzeContractUseCase } from '@/application/use-cases/analyze-contract.use-case';
 import { DomainError } from '@/domain/errors';
 import {
-  MAX_FILE_SIZE_BYTES,
   parseAnalysisRequest,
   type UploadedDocument,
 } from './analysis-request';
@@ -21,6 +21,9 @@ import {
   toAnalysisEvent,
   toErrorEvent,
 } from './analysis-event';
+
+const KEEP_ALIVE_INTERVAL_MS = 15_000;
+const KEEP_ALIVE_COMMENT = ': keep-alive\n\n';
 
 @Controller('analyses')
 export class AnalysesController {
@@ -57,6 +60,11 @@ export class AnalysesController {
     });
     response.flushHeaders();
 
+    const keepAlive = setInterval(
+      () => response.write(KEEP_ALIVE_COMMENT),
+      KEEP_ALIVE_INTERVAL_MS,
+    );
+
     const startedAt = performance.now();
     let outcome = 'completed';
     let clauseCount = 0;
@@ -83,6 +91,7 @@ export class AnalysesController {
         response.write(formatServerSentEvent(toErrorEvent(error)));
       }
     } finally {
+      clearInterval(keepAlive);
       response.end();
       this.logger.info(
         {
