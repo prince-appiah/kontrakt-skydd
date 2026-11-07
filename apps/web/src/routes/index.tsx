@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { HomeScreen } from "@/pages/home-screen";
+import { UploadForm } from "@/features/upload";
 
 export const Route = createFileRoute("/")({
-    component: HomeScreen,
+    head: () => ({ meta: [{ title: "Upload a contract - Clause Guard" }] }),
+    component: UploadForm,
 });

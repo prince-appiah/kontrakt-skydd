@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+export const MAX_FILE_SIZE_BYTES = 5 * 1024 * 1024;
+
 export const riskSchema = z.enum(["low", "medium", "high"]);
 
 export const categorySchema = z.enum([

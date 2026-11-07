@@ -1,4 +1,4 @@
-import { analysisModeSchema } from '@clauseguard/shared';
+import { MAX_FILE_SIZE_BYTES, analysisModeSchema } from '@clauseguard/shared';
 import type { AnalyzeContractInput } from '@/application/use-cases/analyze-contract.use-case';
 import {
   FileTooLargeError,
@@ -6,8 +6,6 @@ import {
   UnsupportedFileTypeError,
 } from '@/domain/errors';
 import type { DocumentFileType } from '@/domain/ports';
-
-export const MAX_FILE_SIZE_BYTES = 5 * 1024 * 1024;
 
 const PDF_SIGNATURE_WINDOW = 1024;
 const ZIP_SIGNATURE = [0x50, 0x4b, 0x03, 0x04];
