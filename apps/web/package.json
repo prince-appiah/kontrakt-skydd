@@ -12,6 +12,7 @@
         "generate-routes": "tsr generate"
     },
     "dependencies": {
+        "@clauseguard/shared": "workspace:*",
         "@internationalized/date": "^3.12.4",
         "@react-aria/utils": "^3.34.1",
         "@react-stately/utils": "^3.12.1",
