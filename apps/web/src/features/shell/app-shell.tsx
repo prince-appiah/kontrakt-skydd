@@ -42,7 +42,7 @@ export const AppShell = ({ children }: PropsWithChildren) => {
                         )}
                     >
                         <ShieldTick aria-hidden="true" className="size-6 text-brand-secondary" />
-                        Clause Guard
+                        Kontrakt Skydd
                     </Link>
                 </div>
             </header>

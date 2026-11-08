@@ -27,7 +27,7 @@ export const Route = createRootRoute({
                     "Upload a contract and get its risky clauses explained. " +
                     "Personal data is redacted before analysis and nothing is stored.",
             },
-            { title: "Clause Guard" },
+            { title: "Kontrakt Skydd" },
         ],
         links: [
             { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },

@@ -1,8 +1,8 @@
-# Clause Guard
+# Kontrakt Skydd
 
 Upload a contract (PDF or DOCX) and get its risky clauses highlighted, each with a plain-English explanation and a suggested counter-clause. Personal data is redacted before any text reaches the AI, and nothing is stored.
 
-Clause Guard is not legal advice. See [Known limits](#known-limits).
+Live demo: https://clause-guard-demo.vercel.app. Not legal advice, see [Known limits](#known-limits).
 
 ## How it works
 
@@ -28,7 +28,7 @@ Privacy is the main feature, so these rules are enforced in code:
 - CORS allows only the web app's origin.
 - The sample contracts contain made-up data only.
 
-What this does not mean: the redacted text still goes to a third-party AI provider (Anthropic). Redaction is best-effort, so read [Known limits](#known-limits) before uploading anything sensitive. The "Sent to AI" tab exists so you can check what left your machine.
+The redacted text still goes to a third-party AI provider (Anthropic), and redaction is best-effort. The "Sent to AI" tab shows exactly what left your machine; read [Known limits](#known-limits) before uploading anything sensitive.
 
 ## Redaction pipeline
 
@@ -108,7 +108,7 @@ Every shape that crosses the network is defined once in `packages/shared` as a Z
 
 ### Why TanStack Start
 
-The web app is a client-rendered app that needs file-based routes, typed search params and a data layer. TanStack Router and Query cover all three from one family. The results page keeps its filters in the URL (`risk`, `category`, `clause`) through validated search params, so a filtered view can be shared or reloaded. The app runs in Start's SPA mode and ships as static files, with no server functions, because the NestJS API is the only backend.
+The web app needs file-based routes, typed search params and a data layer, and TanStack Router and Query cover all three. The results page keeps its filters in the URL (`risk`, `category`, `clause`), so a filtered view can be shared or reloaded. Start runs in SPA mode and ships static files with no server functions, because the NestJS API is the only backend.
 
 ## Run it locally
 
@@ -153,9 +153,9 @@ The web app reads `VITE_API_URL` at build time (default `http://localhost:3001`)
 ## Deployment
 
 - **API:** a Docker image built from the root `Dockerfile`, deployed to Render with the `render.yaml` Blueprint. Set `ANTHROPIC_API_KEY` and `WEB_ORIGIN` in the dashboard.
-- **Web:** a static build on Vercel with `apps/web` as the root directory. Set `VITE_API_URL` to the API's URL. `apps/web/vercel.json` handles routing and security headers.
+- **Web:** a static build on Vercel with `apps/web` as the root directory. Set `VITE_API_URL` to the API's URL. `apps/web/vercel.json` handles routing, security headers and a Content-Security-Policy that allows connections only to the site and the API origin (update that origin if the API moves).
 
-The public demo caps usage at 3 analyses per IP per hour, 50 per day overall and 60,000 characters per document. The counters live in memory and reset when the API restarts.
+The public demo allows 3 analyses per IP per hour, 50 per day overall and 60,000 characters per document.
 
 ## Known limits
 
@@ -165,10 +165,9 @@ The public demo caps usage at 3 analyses per IP per hour, 50 per day overall and
 - **Text that already looks like a token** (for example `[PERSON_1]` written in the contract) would be restored wrongly.
 - **Private mode is not built.** The cloud/private toggle is shown but private is disabled, and the API rejects it. A local-model adapter would be needed.
 - **Original view is PDF only.** DOCX files show the text view only. Highlights on the PDF are placed by matching each quote against the page text, so a finding that cannot be matched has no highlight on the page, and the text on the page cannot be selected. There is no OCR, so scanned documents without a text layer do not work.
-- **English only.** Other languages are not supported.
-- **Limits.** Files up to 5 MB, PDF and DOCX only (the type is read from the file contents, not its name).
-- **Clause positions can be approximate.** The AI quotes clauses and the server finds them in the text. If a quote cannot be found exactly, a close match is used.
-- **Cost controls are best-effort.** Rate limits are in memory on a single instance, so a restart resets them. Set a spend limit on the AI provider account as the final backstop.
+- **English only,** PDF and DOCX up to 5 MB.
+- **Clause positions can be approximate.** If a quoted clause cannot be found exactly, a close match is used.
+- **Cost controls are best-effort.** Rate limits are in memory on one instance, so a restart resets them. Set a spend limit on the AI provider account as the final backstop.
 
 ## Not built
 

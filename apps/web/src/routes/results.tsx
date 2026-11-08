@@ -10,7 +10,7 @@ const searchSchema = z.object({
 });
 
 export const Route = createFileRoute("/results")({
-    head: () => ({ meta: [{ title: "Analysis - Clause Guard" }] }),
+    head: () => ({ meta: [{ title: "Analysis - Kontrakt Skydd" }] }),
     validateSearch: searchSchema,
     component: ResultsPage,
 });
