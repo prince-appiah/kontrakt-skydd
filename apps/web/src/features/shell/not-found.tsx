@@ -7,9 +7,16 @@ export const NotFound = () => {
 
     return (
         <section className="flex flex-col items-start gap-6">
-            <h1 className="text-display-sm font-semibold text-primary md:text-display-md">Page not found</h1>
+            <h1 className="text-display-sm font-semibold text-primary md:text-display-md">
+                Page not found
+            </h1>
             <div className="flex flex-wrap gap-3">
-                <Button color="secondary" size="lg" iconLeading={ArrowLeft} onClick={() => router.history.back()}>
+                <Button
+                    color="secondary"
+                    size="lg"
+                    iconLeading={ArrowLeft}
+                    onClick={() => router.history.back()}
+                >
                     Go back
                 </Button>
                 <Button size="lg" href="/">

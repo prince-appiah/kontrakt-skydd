@@ -1,0 +1,8 @@
+dist
+.output
+.turbo
+src/components
+src/hooks
+src/routeTree.gen.ts
+src/providers
+src/utils

@@ -21,7 +21,14 @@ export const SamplePicker = ({ isDisabled, onSelect }: SamplePickerProps) => (
         </h2>
         <div className="grid gap-3 sm:grid-cols-3">
             {SAMPLES.map(({ id, title }) => (
-                <Button key={id} color="secondary" size="lg" iconLeading={File05} isDisabled={isDisabled} onClick={() => onSelect(id)}>
+                <Button
+                    key={id}
+                    color="secondary"
+                    size="lg"
+                    iconLeading={File05}
+                    isDisabled={isDisabled}
+                    onClick={() => onSelect(id)}
+                >
                     {title}
                 </Button>
             ))}

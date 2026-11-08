@@ -1,5 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import { type AnalysisEvent, type AnalysisMode, type AnalysisResult, analysisResultSchema } from "@clauseguard/shared";
+import {
+    type AnalysisEvent,
+    type AnalysisMode,
+    type AnalysisResult,
+    analysisResultSchema,
+} from "@clauseguard/shared";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import { ZodError } from "zod";
@@ -8,10 +13,18 @@ import { readEventStream } from "@/lib/read-event-stream";
 import type { SampleId } from "./sample-picker";
 
 export const analysisQueryKey = ["analysis"] as const;
+export const sourceDocumentQueryKey = ["analysis-source"] as const;
 
-export type AnalysisRequest = { source: "file"; file: File; mode: AnalysisMode } | { source: "sample"; sampleId: SampleId };
+export type SourceDocument = { kind: "file"; file: File } | { kind: "sample"; sampleId: SampleId };
 
-export type AnalysisStep = Extract<AnalysisEvent, { type: "progress" }>["step"];
+export type AnalysisRequest =
+    { source: "file"; file: File; mode: AnalysisMode } | { source: "sample"; sampleId: SampleId };
+
+export type AnalysisStep =
+    "uploading" | Extract<AnalysisEvent, { type: "progress" }>["step"] | "ready";
+
+const MIN_STEP_MS = 900;
+const READY_HOLD_MS = 1400;
 
 async function loadSample(sampleId: SampleId, signal: AbortSignal): Promise<AnalysisResult> {
     const response = await fetch(`/samples/${sampleId}.result.json`, { signal });
@@ -22,13 +35,54 @@ async function loadSample(sampleId: SampleId, signal: AbortSignal): Promise<Anal
     return analysisResultSchema.parse(await response.json());
 }
 
-async function analyzeFile(file: File, mode: AnalysisMode, signal: AbortSignal, onStep: (step: AnalysisStep) => void): Promise<AnalysisResult> {
+function pause(ms: number, signal: AbortSignal): Promise<void> {
+    return new Promise((resolve, reject) => {
+        if (signal.aborted) {
+            reject(signal.reason);
+            return;
+        }
+
+        const onAbort = () => {
+            clearTimeout(timer);
+            reject(signal.reason);
+        };
+        const timer = setTimeout(() => {
+            signal.removeEventListener("abort", onAbort);
+            resolve();
+        }, ms);
+        signal.addEventListener("abort", onAbort, { once: true });
+    });
+}
+
+function createStepReporter(onStep: (step: AnalysisStep) => void, signal: AbortSignal) {
+    let shownAt = Number.NEGATIVE_INFINITY;
+
+    return async (step: AnalysisStep) => {
+        const wait = shownAt + MIN_STEP_MS - performance.now();
+        if (wait > 0) {
+            await pause(wait, signal);
+        }
+        onStep(step);
+        shownAt = performance.now();
+    };
+}
+
+async function analyzeFile(
+    file: File,
+    mode: AnalysisMode,
+    signal: AbortSignal,
+    onStep: (step: AnalysisStep) => void,
+): Promise<AnalysisResult> {
+    const report = createStepReporter(onStep, signal);
+    await report("uploading");
     const response = await postAnalysis(file, mode, signal);
 
     for await (const event of readEventStream(response)) {
         if (event.type === "progress") {
-            onStep(event.step);
+            await report(event.step);
         } else if (event.type === "result") {
+            await report("ready");
+            await pause(READY_HOLD_MS, signal);
             return event.data;
         } else {
             throw new ApiError(event.code, event.message);
@@ -36,6 +90,16 @@ async function analyzeFile(file: File, mode: AnalysisMode, signal: AbortSignal, 
     }
 
     throw new ApiError("STREAM_ENDED", "The analysis ended unexpectedly");
+}
+
+function toSourceDocument(request: AnalysisRequest): SourceDocument | null {
+    if (request.source === "sample") {
+        return { kind: "sample", sampleId: request.sampleId };
+    }
+
+    return request.file.name.toLowerCase().endsWith(".pdf")
+        ? { kind: "file", file: request.file }
+        : null;
 }
 
 function toMessage(error: unknown): string {
@@ -62,16 +126,22 @@ export function useAnalyzeContract() {
 
     const mutation = useMutation({
         gcTime: 0,
-        onMutate: () => queryClient.removeQueries({ queryKey: analysisQueryKey }),
+        onMutate: () => {
+            queryClient.removeQueries({ queryKey: analysisQueryKey });
+            queryClient.removeQueries({ queryKey: sourceDocumentQueryKey });
+        },
         mutationFn: async (request: AnalysisRequest) => {
             controller.current = new AbortController();
             const { signal } = controller.current;
 
-            return request.source === "sample" ? loadSample(request.sampleId, signal) : analyzeFile(request.file, request.mode, signal, setStep);
+            return request.source === "sample"
+                ? loadSample(request.sampleId, signal)
+                : analyzeFile(request.file, request.mode, signal, setStep);
         },
-        onSuccess: (result) => {
+        onSuccess: (result, request) => {
             queryClient.setQueryData(analysisQueryKey, result);
-            return navigate({ to: "/results" });
+            queryClient.setQueryData(sourceDocumentQueryKey, toSourceDocument(request));
+            return navigate({ to: "/results", viewTransition: true });
         },
         onSettled: () => setStep(null),
     });

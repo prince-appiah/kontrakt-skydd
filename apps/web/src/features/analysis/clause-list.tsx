@@ -42,7 +42,11 @@ export const ClauseList = ({ items, selectedIndex, onSelect }: ClauseListProps) 
     };
 
     return (
-        <ul aria-label="Findings" onKeyDown={handleKeyDown} className="flex max-h-72 flex-col gap-2 overflow-y-auto">
+        <ul
+            aria-label="Findings"
+            onKeyDown={handleKeyDown}
+            className="flex max-h-72 flex-col gap-2 overflow-y-auto"
+        >
             {items.map(({ clause, index }, position) => (
                 <li key={index}>
                     <button
@@ -54,7 +58,9 @@ export const ClauseList = ({ items, selectedIndex, onSelect }: ClauseListProps) 
                         aria-current={index === selectedIndex ? "true" : undefined}
                         onClick={() => onSelect(index)}
                         className={cx(
-                            "flex w-full cursor-pointer flex-col gap-1 rounded-lg p-3 text-left ring-1 ring-secondary outline-brand ring-inset hover:bg-primary_hover focus-visible:outline-2 focus-visible:outline-offset-2",
+                            "flex w-full cursor-pointer flex-col gap-1 rounded-lg p-3 text-left",
+                            "ring-1 ring-secondary outline-brand ring-inset hover:bg-primary_hover",
+                            "focus-visible:outline-2 focus-visible:outline-offset-2",
                             index === selectedIndex && "bg-secondary ring-2 ring-brand",
                         )}
                     >
@@ -62,7 +68,9 @@ export const ClauseList = ({ items, selectedIndex, onSelect }: ClauseListProps) 
                             <Badge size="sm" color={RISK_BADGE_COLORS[clause.risk]}>
                                 {RISK_LABELS[clause.risk]}
                             </Badge>
-                            <span className="text-sm font-medium text-primary">{CATEGORY_LABELS[clause.category]}</span>
+                            <span className="text-sm font-medium text-primary">
+                                {CATEGORY_LABELS[clause.category]}
+                            </span>
                         </span>
                         <span className="line-clamp-2 text-sm text-tertiary">{clause.quote}</span>
                     </button>

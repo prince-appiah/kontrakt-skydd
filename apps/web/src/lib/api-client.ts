@@ -18,15 +18,25 @@ export class ApiError extends Error {
     }
 }
 
-export async function postAnalysis(file: File, mode: AnalysisMode, signal: AbortSignal): Promise<Response> {
+export async function postAnalysis(
+    file: File,
+    mode: AnalysisMode,
+    signal: AbortSignal,
+): Promise<Response> {
     const body = new FormData();
     body.append("file", file);
     body.append("mode", mode);
 
-    const response = await fetch(new URL("/api/v1/analyses", apiUrl), { method: "POST", body, signal });
+    const response = await fetch(new URL("/api/v1/analyses", apiUrl), {
+        method: "POST",
+        body,
+        signal,
+    });
     if (!response.ok) {
         const parsed = errorBodySchema.safeParse(await response.json().catch(() => null));
-        throw parsed.success ? new ApiError(parsed.data.code, parsed.data.message) : new ApiError("INTERNAL_ERROR", "Something went wrong");
+        throw parsed.success
+            ? new ApiError(parsed.data.code, parsed.data.message)
+            : new ApiError("INTERNAL_ERROR", "Something went wrong");
     }
 
     return response;

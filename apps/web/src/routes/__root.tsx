@@ -6,13 +6,15 @@ import { NotFound } from "@/features/shell/not-found";
 import { RouteProvider } from "@/providers/router-provider";
 import appCss from "@/styles/globals.css?url";
 
-// Follows the system theme before first paint, so dark-mode visitors see no light flash. Nothing is stored.
-const themeScript = `
+const themeScript = `(() => {
+    const root = document.documentElement;
+    if (root.dataset.themeSync) return;
+    root.dataset.themeSync = "true";
     const dark = window.matchMedia("(prefers-color-scheme: dark)");
-    const apply = () => document.documentElement.classList.toggle("dark-mode", dark.matches);
+    const apply = () => root.classList.toggle("dark-mode", dark.matches);
     apply();
     dark.addEventListener("change", apply);
-`;
+})();`;
 
 export const Route = createRootRoute({
     head: () => ({
@@ -21,7 +23,9 @@ export const Route = createRootRoute({
             { name: "viewport", content: "width=device-width, initial-scale=1.0" },
             {
                 name: "description",
-                content: "Upload a contract and get its risky clauses explained. Personal data is redacted before analysis and nothing is stored.",
+                content:
+                    "Upload a contract and get its risky clauses explained. " +
+                    "Personal data is redacted before analysis and nothing is stored.",
             },
             { title: "Clause Guard" },
         ],
@@ -51,7 +55,10 @@ function RootDocument({ children }: { children: ReactNode }) {
 }
 
 function RootComponent() {
-    const [queryClient] = useState(() => new QueryClient({ defaultOptions: { queries: { staleTime: Infinity, retry: false } } }));
+    const [queryClient] = useState(
+        () =>
+            new QueryClient({ defaultOptions: { queries: { staleTime: Infinity, retry: false } } }),
+    );
 
     return (
         <QueryClientProvider client={queryClient}>

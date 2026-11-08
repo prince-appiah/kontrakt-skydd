@@ -2,6 +2,7 @@ import { Check, Copy01 } from "@untitledui/icons";
 import { Badge } from "@/components/base/badges/badges";
 import { ButtonUtility } from "@/components/base/buttons/button-utility";
 import { useClipboard } from "@/hooks/use-clipboard";
+import { cx } from "@/utils/cx";
 import { CATEGORY_LABELS, RISK_BADGE_COLORS, RISK_LABELS } from "./clause-labels";
 import type { LocatedClauseView } from "./results-page";
 
@@ -9,7 +10,12 @@ export const ClausePanel = ({ clause }: { clause: LocatedClauseView["clause"] })
     const clipboard = useClipboard();
 
     return (
-        <section aria-labelledby="finding-heading" className="flex flex-col gap-4 rounded-xl bg-primary p-4 ring-1 ring-secondary ring-inset">
+        <section
+            aria-labelledby="finding-heading"
+            className={cx(
+                "flex flex-col gap-4 rounded-xl bg-primary p-4 ring-1 ring-secondary ring-inset",
+            )}
+        >
             <h2 id="finding-heading" className="sr-only">
                 Finding details
             </h2>
@@ -21,7 +27,9 @@ export const ClausePanel = ({ clause }: { clause: LocatedClauseView["clause"] })
                     {CATEGORY_LABELS[clause.category]}
                 </Badge>
             </div>
-            <blockquote className="border-l-2 border-secondary pl-3 text-sm text-tertiary">{clause.quote}</blockquote>
+            <blockquote className="border-l-2 border-secondary pl-3 text-sm text-tertiary">
+                {clause.quote}
+            </blockquote>
             <div className="flex flex-col gap-1">
                 <h3 className="text-sm font-semibold text-primary">Why it matters</h3>
                 <p className="text-sm text-secondary">{clause.explanation}</p>
@@ -37,7 +45,9 @@ export const ClausePanel = ({ clause }: { clause: LocatedClauseView["clause"] })
                         onClick={() => clipboard.copy(clause.counterClause)}
                     />
                 </div>
-                <p className="rounded-lg bg-secondary p-3 text-sm text-secondary">{clause.counterClause}</p>
+                <p className="rounded-lg bg-secondary p-3 text-sm text-secondary">
+                    {clause.counterClause}
+                </p>
             </div>
         </section>
     );

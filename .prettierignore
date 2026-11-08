@@ -1,0 +1,9 @@
+pnpm-lock.yaml
+**/dist
+**/.output
+**/.turbo
+apps/web/src/components
+apps/web/src/hooks
+apps/web/src/routeTree.gen.ts
+apps/web/src/providers
+apps/web/src/utils

@@ -11,7 +11,13 @@ interface ClauseFiltersProps {
     onCategoryChange: (category: Category | undefined) => void;
 }
 
-export const ClauseFilters = ({ risk, category, categories, onRiskChange, onCategoryChange }: ClauseFiltersProps) => (
+export const ClauseFilters = ({
+    risk,
+    category,
+    categories,
+    onRiskChange,
+    onCategoryChange,
+}: ClauseFiltersProps) => (
     <div className="flex flex-col gap-3">
         <ButtonGroup
             aria-label="Filter by risk"
@@ -31,7 +37,10 @@ export const ClauseFilters = ({ risk, category, categories, onRiskChange, onCate
             size="md"
             selectedKey={category ?? "all"}
             onSelectionChange={(key) => onCategoryChange(categorySchema.safeParse(key).data)}
-            items={[{ id: "all", label: "All categories" }, ...categories.map((id) => ({ id, label: CATEGORY_LABELS[id] }))]}
+            items={[
+                { id: "all", label: "All categories" },
+                ...categories.map((id) => ({ id, label: CATEGORY_LABELS[id] })),
+            ]}
         >
             {(item) => <Select.Item id={item.id} label={item.label} />}
         </Select>

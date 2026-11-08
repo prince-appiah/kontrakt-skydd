@@ -1,2 +1,6 @@
 export * from "./upload-form";
-export { analysisQueryKey } from "./use-analyze-contract";
+export {
+    analysisQueryKey,
+    sourceDocumentQueryKey,
+    type SourceDocument,
+} from "./use-analyze-contract";

@@ -1,25 +1,30 @@
 import { useState } from "react";
 import type { AnalysisMode } from "@clauseguard/shared";
+import { AnalysisProgress, type ProgressStage } from "@/components/ai/analysis-progress";
 import { ButtonGroup, ButtonGroupItem } from "@/components/base/button-group/button-group";
 import { Button } from "@/components/base/buttons/button";
-import { ProgressBar } from "@/components/base/progress-indicators/progress-indicators";
 import { Dropzone } from "./dropzone";
 import { PrivacyNotice } from "./privacy-notice";
 import { SamplePicker } from "./sample-picker";
 import { SelectedFile } from "./selected-file";
 import { type AnalysisStep, useAnalyzeContract } from "./use-analyze-contract";
 
-const STEP_MESSAGES: Record<AnalysisStep, string> = {
-    parsing: "Reading the document",
-    redacting: "Redacting personal data",
-    analyzing: "Analyzing the contract",
-};
-
-const STEP_PROGRESS: Record<AnalysisStep, number> = {
-    parsing: 15,
-    redacting: 35,
-    analyzing: 65,
-};
+const STAGES: (ProgressStage & { id: AnalysisStep })[] = [
+    { id: "uploading", label: "Uploading your contract" },
+    { id: "parsing", label: "Reading the document" },
+    { id: "redacting", label: "Redacting sensitive info" },
+    {
+        id: "analyzing",
+        label: "Reviewing for red flags",
+        messages: [
+            "Reviewing for red flags",
+            "Checking termination and liability terms",
+            "Looking at payment and renewal terms",
+            "Drafting counter-clauses",
+        ],
+    },
+    { id: "ready", label: "Preparing your results" },
+];
 
 export const UploadForm = () => {
     const { analyze, isPending, step, error: analysisError } = useAnalyzeContract();
@@ -74,7 +79,11 @@ export const UploadForm = () => {
                         }}
                     >
                         <ButtonGroupItem id="cloud">Cloud</ButtonGroupItem>
-                        <ButtonGroupItem id="private" isDisabled aria-label="Private, not available yet">
+                        <ButtonGroupItem
+                            id="private"
+                            isDisabled
+                            aria-label="Private, not available yet"
+                        >
                             Private
                         </ButtonGroupItem>
                     </ButtonGroup>
@@ -92,14 +101,7 @@ export const UploadForm = () => {
                         Analyze
                     </Button>
                 </div>
-                {step && (
-                    <div role="group" aria-label="Analysis progress">
-                        <ProgressBar value={STEP_PROGRESS[step]} labelPosition="bottom" valueFormatter={() => STEP_MESSAGES[step]} />
-                    </div>
-                )}
-                <p role="status" className="sr-only">
-                    {step ? STEP_MESSAGES[step] : ""}
-                </p>
+                {step && <AnalysisProgress stages={STAGES} activeId={step} />}
             </div>
 
             <SamplePicker

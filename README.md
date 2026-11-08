@@ -1,159 +1,175 @@
-# Turborepo starter
+# Clause Guard
 
-This Turborepo starter is maintained by the Turborepo core team.
+Upload a contract (PDF or DOCX) and get its risky clauses highlighted, each with a plain-English explanation and a suggested counter-clause. Personal data is redacted before any text reaches the AI, and nothing is stored.
 
-## Using this example
+Clause Guard is not legal advice. See [Known limits](#known-limits).
 
-Run the following command:
+## How it works
 
-```sh
-npx create-turbo@latest
+1. Upload a PDF or DOCX, or open one of three sample contracts.
+2. The server extracts the text and redacts personal data.
+3. The redacted text goes to the AI, which returns the risky clauses as JSON: category, risk level, explanation and counter-clause.
+4. The server puts the real values back and streams the result to the browser. Nothing is saved.
+5. The contract appears with highlighted clauses (red high, amber medium, grey low) and a side panel with the details. An Original tab shows the real PDF pages with the same highlights on top (PDFs only), and another tab shows exactly what was sent to the AI.
+
+Risk is never shown by colour alone: each level also has its own underline (solid, dashed or dotted).
+
+## Privacy model
+
+Privacy is the main feature, so these rules are enforced in code:
+
+- Files and extracted text are never written to disk or a database. Uploads are held in memory for the length of the request.
+- The AI only sees the redacted text. Names, emails, phone numbers, personal numbers, IBANs, postcodes, street addresses, company names with a legal suffix and money amounts are replaced with tokens such as `[PERSON_1]`.
+- The token map exists only in request memory. It is never returned, cached or logged.
+- Logs hold request ids, file sizes, timings, token counts and error codes. They never hold document text, redacted or not.
+- Error messages sent to the browser never contain document text.
+- The browser keeps the result, and the uploaded PDF for the Original tab, in memory only. The PDF is rendered in your browser and is never sent anywhere except the analysis request. Refreshing the results page clears both. Nothing goes in `localStorage` or `sessionStorage`.
+- The web app makes no third-party requests: fonts are self-hosted and there are no analytics or CDN links.
+- CORS allows only the web app's origin.
+- The sample contracts contain made-up data only.
+
+What this does not mean: the redacted text still goes to a third-party AI provider (Anthropic). Redaction is best-effort, so read [Known limits](#known-limits) before uploading anything sensitive. The "Sent to AI" tab exists so you can check what left your machine.
+
+## Redaction pipeline
+
+```mermaid
+flowchart TD
+    A["Uploaded file"] --> B["Extract text"]
+    B --> C["Detect personal data (regex + name detection)"]
+    C --> D["Replace with tokens, keep the map in memory"]
+    D --> E["Redacted text"]
+    E --> F["AI returns clauses as JSON, quoting tokens unchanged"]
+    F --> G["Locate each quote in the redacted text"]
+    G --> H["Map positions back to the original text"]
+    H --> I["Restore real values in quotes, explanations and counter-clauses"]
+    I --> J["Stream result to the browser"]
+    J --> K["Buffers and map discarded"]
+    E -.-> L["Shown to the user in the Sent to AI tab"]
 ```
 
-## What's inside?
+Detection uses regular expressions for emails, phone numbers, Swedish personal numbers, IBANs, postcodes, street addresses, company suffixes and amounts, plus the `compromise` library for person names. Cities are left alone so jurisdiction clauses stay readable.
 
-This Turborepo includes the following packages/apps:
+## Architecture
 
-### Apps and Packages
+The API follows clean architecture. Dependencies point inward, and the domain layer imports no libraries.
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `@next/eslint-plugin-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
-
-```sh
-cd my-turborepo
-turbo build
+```mermaid
+flowchart LR
+    subgraph interface
+        C["Controller, exception filter, config"]
+    end
+    subgraph application
+        U["AnalyzeContractUseCase"]
+        S["Redactor, ClauseLocator"]
+    end
+    subgraph domain
+        P["Ports: DocumentParser, PiiDetector, LlmProvider"]
+        E["Entities, errors"]
+    end
+    subgraph infra
+        A1["PDF and DOCX parser"]
+        A2["Regex and name detector"]
+        A3["Anthropic adapter"]
+    end
+    C --> U
+    U --> S
+    U --> P
+    S --> P
+    A1 -. implements .-> P
+    A2 -. implements .-> P
+    A3 -. implements .-> P
 ```
 
-Without global `turbo`, use your package manager:
+Use cases depend on ports and never on concrete adapters. The adapters are bound to the ports in `apps/api/src/app.module.ts`, so swapping the AI provider means writing one adapter.
 
-```sh
-cd my-turborepo
-npx turbo build
-pnpm exec turbo build
-pnpm exec turbo build
+```
+apps/
+  web/                 TanStack Start (SPA mode), TanStack Router and Query, Untitled UI, Tailwind, pdf.js
+  api/                 NestJS
+packages/
+  shared/              Zod schemas and types used by both apps
+  eslint-config/       shared lint config
+  typescript-config/   shared tsconfig
 ```
 
-You can build a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
+### API
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
+`POST /api/v1/analyses` takes `multipart/form-data` with `file` and `mode`, and answers with a server-sent event stream:
 
-```sh
-turbo build --filter=docs
+```ts
+{ type: "progress", step: "parsing" | "redacting" | "analyzing" }
+{ type: "result", data: ContractAnalysis }
+{ type: "error", code: string, message: string }
 ```
 
-Without global `turbo`:
+The browser reads the stream with `fetch`, because `EventSource` cannot send a POST. Errors found before the stream starts come back as plain JSON `{ code, message }` with an HTTP status. `GET /api/v1/health` is used by the host's health check and is exempt from rate limits.
 
-```sh
-npx turbo build --filter=docs
-pnpm exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
+Every shape that crosses the network is defined once in `packages/shared` as a Zod schema and validated at each edge: the upload, the environment variables, the AI's output and the events in the browser.
+
+### Why TanStack Start
+
+The web app is a client-rendered app that needs file-based routes, typed search params and a data layer. TanStack Router and Query cover all three from one family. The results page keeps its filters in the URL (`risk`, `category`, `clause`) through validated search params, so a filtered view can be shared or reloaded. The app runs in Start's SPA mode and ships as static files, with no server functions, because the NestJS API is the only backend.
+
+## Run it locally
+
+You need Node 24 and pnpm 11.
+
+```bash
+pnpm install
+cp apps/api/.env.example apps/api/.env
+cp apps/web/.env.example apps/web/.env
 ```
 
-### Develop
+Put an Anthropic API key in `apps/api/.env` as `ANTHROPIC_API_KEY`, then:
 
-To develop all apps and packages, run the following command:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
-
-```sh
-cd my-turborepo
-turbo dev
+```bash
+pnpm dev
 ```
 
-Without global `turbo`, use your package manager:
+The web app is on http://localhost:3000 and the API on http://localhost:3001. The sample contracts work without a key because their results are precomputed.
 
-```sh
-cd my-turborepo
-npx turbo dev
-pnpm exec turbo dev
-pnpm exec turbo dev
-```
+Other commands: `pnpm build`, `pnpm lint`, `pnpm check-types`, `pnpm test`.
 
-You can develop a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
+### API environment variables
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
+| Variable                     | Default  | Purpose                                                                       |
+| ---------------------------- | -------- | ----------------------------------------------------------------------------- |
+| `PORT`                       | `3001`   | Port to listen on                                                             |
+| `WEB_ORIGIN`                 | required | The only origin CORS allows                                                   |
+| `LLM_PROVIDER`               | required | Only `anthropic` has an adapter                                               |
+| `LLM_MODEL`                  | required | Model id, for example `claude-sonnet-5-5`                                     |
+| `ANTHROPIC_API_KEY`          | required | Key for the provider                                                          |
+| `TRUST_PROXY_HOPS`           | `0`      | Proxies in front of the API, so the per-IP limit sees the real client address |
+| `RATE_LIMIT_PER_IP_PER_HOUR` | `3`      | Analyses per IP per hour                                                      |
+| `RATE_LIMIT_PER_DAY`         | `50`     | Analyses per day across all visitors                                          |
+| `MAX_DOCUMENT_CHARACTERS`    | `60000`  | Longest extracted text accepted                                               |
 
-```sh
-turbo dev --filter=web
-```
+The web app reads `VITE_API_URL` at build time (default `http://localhost:3001`).
 
-Without global `turbo`:
+## Samples
 
-```sh
-npx turbo dev --filter=web
-pnpm exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
-```
+`apps/web/public/samples/` holds three made-up contracts (lease, freelance agreement, SaaS terms), each as a PDF and a DOCX with a precomputed `.result.json`. Opening a sample loads that JSON and never calls the API, so the public demo costs nothing to browse. Regenerate the JSON files when the prompt, the model or the redactor changes.
 
-### Remote Caching
+## Deployment
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
+- **API:** a Docker image built from the root `Dockerfile`, deployed to Render with the `render.yaml` Blueprint. Set `ANTHROPIC_API_KEY` and `WEB_ORIGIN` in the dashboard.
+- **Web:** a static build on Vercel with `apps/web` as the root directory. Set `VITE_API_URL` to the API's URL. `apps/web/vercel.json` handles routing and security headers.
 
-Turborepo can use a technique known as [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+The public demo caps usage at 3 analyses per IP per hour, 50 per day overall and 60,000 characters per document. The counters live in memory and reset when the API restarts.
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
+## Known limits
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
+- **Not legal advice.** The output is an AI's opinion. It can miss risky clauses, flag harmless ones and suggest counter-clauses that do not fit your situation. Have a lawyer review anything that matters.
+- **Name detection can miss names.** It is tuned for English, so names it does not recognise (for example "Örjan Öberg") reach the AI unredacted. Check the "Sent to AI" tab.
+- **Some details are not redacted.** Apartment and unit numbers ("apartment 1204") are kept, only the street address is replaced. ISO dates are kept. Cities are kept on purpose.
+- **Text that already looks like a token** (for example `[PERSON_1]` written in the contract) would be restored wrongly.
+- **Private mode is not built.** The cloud/private toggle is shown but private is disabled, and the API rejects it. A local-model adapter would be needed.
+- **Original view is PDF only.** DOCX files show the text view only. Highlights on the PDF are placed by matching each quote against the page text, so a finding that cannot be matched has no highlight on the page, and the text on the page cannot be selected. There is no OCR, so scanned documents without a text layer do not work.
+- **English only.** Other languages are not supported.
+- **Limits.** Files up to 5 MB, PDF and DOCX only (the type is read from the file contents, not its name).
+- **Clause positions can be approximate.** The AI quotes clauses and the server finds them in the text. If a quote cannot be found exactly, a close match is used.
+- **Cost controls are best-effort.** Rate limits are in memory on a single instance, so a restart resets them. Set a spend limit on the AI provider account as the final backstop.
 
-```sh
-cd my-turborepo
-turbo login
-```
+## Not built
 
-Without global `turbo`, use your package manager:
-
-```sh
-cd my-turborepo
-npx turbo login
-pnpm exec turbo login
-pnpm exec turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
-
-```sh
-turbo link
-```
-
-Without global `turbo`:
-
-```sh
-npx turbo link
-pnpm exec turbo link
-pnpm exec turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turborepo.dev/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.dev/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.dev/docs/reference/configuration)
-- [CLI Usage](https://turborepo.dev/docs/reference/command-line-reference)
+Accounts, a database, an Ollama adapter for private mode, Swedish contracts, and comparing two versions of a contract.
