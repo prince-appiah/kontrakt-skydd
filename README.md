@@ -2,7 +2,9 @@
 
 Upload a contract (PDF or DOCX) and get its risky clauses highlighted, each with a plain-English explanation and a suggested counter-clause. Personal data is redacted before any text reaches the AI, and nothing is stored.
 
-Live demo: https://clause-guard-demo.vercel.app. Not legal advice, see [Known limits](#known-limits).
+Live demo: https://kontrakt-skydd.vercel.app. Not legal advice, see [Known limits](#known-limits).
+
+![Uploading a lease, reviewing the highlighted clauses, the original PDF and what was sent to the AI](.github/demo.gif)
 
 ## How it works
 
@@ -13,6 +15,17 @@ Live demo: https://clause-guard-demo.vercel.app. Not legal advice, see [Known li
 5. The contract appears with highlighted clauses (red high, amber medium, grey low) and a side panel with the details. An Original tab shows the real PDF pages with the same highlights on top (PDFs only), and another tab shows exactly what was sent to the AI.
 
 Risk is never shown by colour alone: each level also has its own underline (solid, dashed or dotted).
+
+## What I built and learned
+
+- **PII redaction:** replacing personal data with tokens before the AI sees it, then restoring the real values.
+- **Schema validation:** checking the AI's JSON with Zod, retrying once, and locating each quote in the source text.
+- **Clean architecture (ports and adapters):** NestJS use cases depend on interfaces, so the AI provider can be swapped by writing one adapter.
+- **Server-sent events:** streaming progress and results over a POST with `fetch`, and cancelling the AI call when the user leaves.
+- **URL as state:** TanStack Router keeps the risk and category filters in typed search params, so a view can be shared.
+- **Accessibility:** keyboard navigation, ARIA labels, and risk shown with underline styles as well as colour.
+- **Performance:** code splitting, lazy loading and memoization, which cut first-load JavaScript by about 11%.
+- **Deployment and hardening:** Docker on Render, a static build on Vercel, rate limits, and a Content-Security-Policy.
 
 ## Privacy model
 
